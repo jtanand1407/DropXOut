@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "../styles/Body.css";
 import axios from "axios";
+import { BiLoaderCircle } from "react-icons/bi";
 
 const Body = ({ list, setList, handleClick }) => {
   
@@ -16,6 +17,7 @@ const Body = ({ list, setList, handleClick }) => {
 
   return (
     <div className="main-div">
+      {list.length==0 && <div className="loader-div"><h2>Loading</h2><BiLoaderCircle className="loader"/></div>}
       {list.map((item) => {
         return <Card item={item} handleClick={handleClick} />;
       })}

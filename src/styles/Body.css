@@ -10,3 +10,13 @@
     margin: 0;
     padding: 0;
 }
+
+.loader {
+    font-size: 3rem;
+}
+
+.loader-div {
+    display: flex;
+    gap: 1rem;
+    margin-left: 2rem;
+}
