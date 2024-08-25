@@ -3,8 +3,8 @@ import Card from "./Card";
 import "../styles/Body.css";
 import axios from "axios";
 
-const Body = ({ handleClick }) => {
-  const [list, setList] = useState([]);
+const Body = ({ list, setList, handleClick }) => {
+  
 
   useEffect(() => {
     const fetchdata = async () => {
