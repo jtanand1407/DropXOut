@@ -1,0 +1,12 @@
+.main-div {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    width: 100%;
+    margin-top: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}

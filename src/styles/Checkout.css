@@ -1,0 +1,15 @@
+.checkout-item-div {
+    display: flex;
+    gap: 30px;
+    margin: 20px 30px;
+    box-shadow: 0 0 3px 3px grey;
+    padding: 20px
+}
+
+
+.checkout-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+}
