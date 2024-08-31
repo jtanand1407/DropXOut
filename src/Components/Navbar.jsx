@@ -7,7 +7,7 @@ const Navbar = ({ count }) => {
   return (
     <nav>
       <div className="nav-div">
-        <Link className="link" to="/">
+        <Link className="link" to="/home">
           <span className="logo">Drop X Out</span>
         </Link>
         <div className="cart-div">

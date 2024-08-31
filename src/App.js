@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Components/Navbar";
 import Body from "./Components/Body";
 import Basket from "./Components/Basket";
+import Login from "./Components/Login";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
@@ -13,9 +14,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get(
-        "https://testbackenddeploy.onrender.com/cart"
-      );
+      const res = await axios.get("http://127.0.0.1:3030/cart");
       setItems(res.data);
     };
     fetchData();
@@ -29,23 +28,20 @@ const App = () => {
         setWarn(false);
       }, 2000);
     } else {
-      const addData = await axios.post(
-        "https://testbackenddeploy.onrender.com/cart",
-        {
-          title: newItem["title"],
-          price: newItem["price"],
-          description: newItem["description"],
-          category: newItem["category"],
-          image: newItem["image"],
-        }
-      );
+      const addData = await axios.post("http://127.0.0.1:3030/cart", {
+        title: newItem["title"],
+        price: newItem["price"],
+        description: newItem["description"],
+        category: newItem["category"],
+        image: newItem["image"],
+      });
       setItems((prevItem) => [...prevItem, addData.data]);
     }
   };
 
   const handleRemove = async (removeItem) => {
     const res = await axios.delete(
-      `https://testbackenddeploy.onrender.com/cart/${removeItem._id}`
+      `http://127.0.0.1:3030/cart/${removeItem._id}`
     );
     setItems(items.filter((item) => item._id != removeItem._id));
   };
@@ -53,18 +49,26 @@ const App = () => {
   return (
     <div className="app-main-div">
       <BrowserRouter>
-        <Navbar count={items.length} />
-        {warn && <h2 className="warn">Item already added</h2>}
         <Routes>
+          <Route path="/" element={<Login/>}/>
           <Route
-            path="/"
+            path="home"
             element={
-              <Body list={list} setList={setList} handleClick={handleClick} />
+              <>
+                <Navbar count={items.length} />
+                {warn && <h2 className="warn">Item already added</h2>}
+                <Body list={list} setList={setList} handleClick={handleClick} />
+              </>
             }
           />
           <Route
             path="cart"
-            element={<Basket items={items} handleRemove={handleRemove} />}
+            element={
+              <>
+                <Navbar count={items.length} />
+                <Basket items={items} handleRemove={handleRemove} />
+              </>
+            }
           />
         </Routes>
       </BrowserRouter>
