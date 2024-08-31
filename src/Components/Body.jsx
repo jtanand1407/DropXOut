@@ -9,7 +9,7 @@ const Body = ({ list, setList, handleClick }) => {
 
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await axios.get("http://127.0.0.1:3030/home");
+      const res = await axios.get("https://testbackenddeploy.onrender.com/home");
       setList(res.data);
     };
     fetchdata();

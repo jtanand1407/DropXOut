@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://127.0.0.1:3030/cart");
+      const res = await axios.get("https://testbackenddeploy.onrender.com/cart");
       setItems(res.data);
     };
     fetchData();
@@ -28,7 +28,7 @@ const App = () => {
         setWarn(false);
       }, 2000);
     } else {
-      const addData = await axios.post("http://127.0.0.1:3030/cart", {
+      const addData = await axios.post("https://testbackenddeploy.onrender.com/cart", {
         title: newItem["title"],
         price: newItem["price"],
         description: newItem["description"],
@@ -41,7 +41,7 @@ const App = () => {
 
   const handleRemove = async (removeItem) => {
     const res = await axios.delete(
-      `http://127.0.0.1:3030/cart/${removeItem._id}`
+      `https://testbackenddeploy.onrender.com/cart/${removeItem._id}`
     );
     setItems(items.filter((item) => item._id != removeItem._id));
   };

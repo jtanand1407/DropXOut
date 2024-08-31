@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    const res = await axios.post("http://127.0.0.1:3030/login", {
+    const res = await axios.post("https://testbackenddeploy.onrender.com/login", {
       username: username,
       password: password,
     });
@@ -40,7 +40,7 @@ const Login = () => {
 
   const handleRegister = async () => {
     const res = await axios
-      .post("http://127.0.0.1:3030/register", {
+      .post("https://testbackenddeploy.onrender.com/register", {
         username: username,
         password: password,
       })
@@ -56,7 +56,7 @@ const Login = () => {
 
   const getHome = async () => {
     const verify = await axios
-      .post("http://127.0.0.1:3030/verify", {
+      .post("https://testbackenddeploy.onrender.com/verify", {
         token: token,
       })
       .then((response) => response)
