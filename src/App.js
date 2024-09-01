@@ -11,11 +11,20 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [warn, setWarn] = useState(false);
   const [list, setList] = useState([]);
+  const [cost, setCost] = useState(0);
+
+  const baseUrl = "https://testbackenddeploy.onrender.com";
+  // const baseUrl = "http://127.0.0.1:3030";
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("https://testbackenddeploy.onrender.com/cart");
+      const res = await axios.get(baseUrl + "/cart");
       setItems(res.data);
+      let amount = 0;
+      for (let i = 0; i < res.data.length; i++) {
+        amount += parseFloat(res.data[i]["price"]);
+      }
+      setCost(amount.toFixed(2));
     };
     fetchData();
   }, []);
@@ -28,7 +37,7 @@ const App = () => {
         setWarn(false);
       }, 2000);
     } else {
-      const addData = await axios.post("https://testbackenddeploy.onrender.com/cart", {
+      const addData = await axios.post(baseUrl + "/cart", {
         title: newItem["title"],
         price: newItem["price"],
         description: newItem["description"],
@@ -36,21 +45,21 @@ const App = () => {
         image: newItem["image"],
       });
       setItems((prevItem) => [...prevItem, addData.data]);
+      setCost((parseFloat(cost)+parseFloat(newItem['price'])).toFixed(2));
     }
   };
 
   const handleRemove = async (removeItem) => {
-    const res = await axios.delete(
-      `https://testbackenddeploy.onrender.com/cart/${removeItem._id}`
-    );
+    const res = await axios.delete(baseUrl + `/cart/${removeItem._id}`);
     setItems(items.filter((item) => item._id != removeItem._id));
+    setCost((parseFloat(cost)-parseFloat(removeItem['price'])).toFixed(2));
   };
 
   return (
     <div className="app-main-div">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Login />} />
           <Route
             path="home"
             element={
@@ -66,7 +75,7 @@ const App = () => {
             element={
               <>
                 <Navbar count={items.length} />
-                <Basket items={items} handleRemove={handleRemove} />
+                <Basket items={items} cost={cost} handleRemove={handleRemove} />
               </>
             }
           />

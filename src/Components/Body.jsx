@@ -6,10 +6,14 @@ import { BiLoaderCircle } from "react-icons/bi";
 
 const Body = ({ list, setList, handleClick }) => {
   
+  const baseUrl = "https://testbackenddeploy.onrender.com";
+  // const baseUrl = "http://127.0.0.1:3030";
 
   useEffect(() => {
     const fetchdata = async () => {
-      const res = await axios.get("https://testbackenddeploy.onrender.com/home");
+      const res = await axios.get(
+        baseUrl+"/home"
+      );
       setList(res.data);
     };
     fetchdata();
@@ -17,7 +21,12 @@ const Body = ({ list, setList, handleClick }) => {
 
   return (
     <div className="main-div">
-      {list.length==0 && <div className="loader-div"><h2>Loading</h2><BiLoaderCircle className="loader"/></div>}
+      {list.length == 0 && (
+        <div className="loader-div">
+          <h2>Loading</h2>
+          <BiLoaderCircle className="loader" />
+        </div>
+      )}
       {list.map((item) => {
         return <Card item={item} handleClick={handleClick} />;
       })}

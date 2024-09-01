@@ -11,6 +11,10 @@ const Login = () => {
   const [login, setLogin] = useState("");
   const [token, setToken] = useState(localStorage.getItem("token"));
 
+  const baseUrl = "https://testbackenddeploy.onrender.com";
+  // const baseUrl = "http://127.0.0.1:3030";
+
+
   const navigate = useNavigate();
 
   const handleUserChange = (event) => {
@@ -22,7 +26,7 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    const res = await axios.post("https://testbackenddeploy.onrender.com/login", {
+    const res = await axios.post(baseUrl+"/login", {
       username: username,
       password: password,
     });
@@ -40,7 +44,7 @@ const Login = () => {
 
   const handleRegister = async () => {
     const res = await axios
-      .post("https://testbackenddeploy.onrender.com/register", {
+      .post(baseUrl+"/register", {
         username: username,
         password: password,
       })
@@ -56,7 +60,7 @@ const Login = () => {
 
   const getHome = async () => {
     const verify = await axios
-      .post("https://testbackenddeploy.onrender.com/verify", {
+      .post(baseUrl+"/verify", {
         token: token,
       })
       .then((response) => response)

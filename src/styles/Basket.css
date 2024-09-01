@@ -1,5 +1,22 @@
-.checkout-main-div {
+.checkout-div {
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.total-bill {
+    background-color: bisque;
+    font-weight: bold;
+    padding: 1.5rem;
+    width: fit-content;
+    display: flex;
+    margin: auto;
+}
+
+.checkout-main-div{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+    gap: 4rem;
 }
